@@ -98,6 +98,7 @@ if err != nil {
 }
 
 fmt.Println("AI Response:", response.Text)
+fmt.Printf("Tokens used: %d input, %d output, %d total\n", response.TokenUsage.InputTokens, response.TokenUsage.OutputTokens, response.TokenUsage.TotalTokens)
 ```
 
 #### Multimodal Image Recognition
@@ -105,6 +106,7 @@ fmt.Println("AI Response:", response.Text)
 ```go
 image := ai.Image{
     Format: "jpeg",
+    Data:   imageBytes,
     URL: "https://example.com/sample.jpg",
 }
 
@@ -118,6 +120,7 @@ if err != nil {
 }
 
 fmt.Println("AI Response:", response.Text)
+fmt.Printf("Tokens used: %d input, %d output, %d total\n", response.TokenUsage.InputTokens, response.TokenUsage.OutputTokens, response.TokenUsage.TotalTokens)
 ```
 
 ## Running the Example
@@ -128,6 +131,36 @@ To run the example provided in `main.go`, use:
 go run main.go
 ```
 
+## Expected Output
+
+### OpenAI Example Output
+```
+-----------------Testing OpenAI client--------------
+AI Response:
+A code poet dreams,
+Logic flows in silent streams,
+Night hums with debug.
+Tokens used: 10 input, 15 output, 25 total
+```
+
+### Gemini Example Output
+```
+----------------Testing Gemini client---------------
+AI Response:
+Patience, practice, learn,
+Code with heart and mind as one,
+Mastery will come.
+Tokens used: 12 input, 18 output, 30 total
+```
+
+### Multimodal Image Recognition Output
+```
+-------------Testing Gemini Multimodal client--------
+AI Response:
+The image shows the Palace of Westminster, a historic building in London.
+Tokens used: 20 input, 25 output, 45 total
+```
+
 ## Contributing
 
 Feel free to submit pull requests or report issues if you find any bugs or improvements.
@@ -135,6 +168,4 @@ Feel free to submit pull requests or report issues if you find any bugs or impro
 ## License
 
 This project is licensed under the MIT License.
-
-
 
