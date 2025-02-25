@@ -45,15 +45,10 @@ You can initialize a client for different AI providers:
 #### OpenAI Example
 
 ```go
-ctx := context.Background()
 client, err := ai.InitializeClient(ctx, ai.ProviderOpenAI,
     ai.WithAPIKey("your_openai_key"),
     ai.WithModelID("gpt-4o-mini"),
 )
-if err != nil {
-    log.Fatalf("Failed to initialize OpenAI client: %v", err)
-}
-defer client.Close()
 ```
 
 #### Gemini Example
