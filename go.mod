@@ -1,4 +1,4 @@
-module github.com/NaheedRayan/ai-router
+module openrouter-go
 
 go 1.23.4
 
