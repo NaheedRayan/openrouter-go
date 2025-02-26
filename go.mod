@@ -1,4 +1,4 @@
-module openrouter-go
+module github.com/NaheedRayan/openrouter-go
 
 go 1.23.4
 

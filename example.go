@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/NaheedRayan/openrouter-go/ai" // Replace with your actual package path
 	"github.com/joho/godotenv"
-	"openrouter-go/ai" // Replace with your actual package path
 )
 
 // LoadEnv Load environment variables
