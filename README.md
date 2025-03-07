@@ -2,6 +2,18 @@
 
 This repository provides a Golang library for interacting with various AI models such as OpenAI (GPT), Google Gemini, and AWS Bedrock. The library supports both text completion and multimodal image recognition.
 
+<p align="center">
+
+[![Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://prettier.io)
+[![license](https://img.shields.io/badge/license-MIT-green.svg)]()
+[![SemVer](http://img.shields.io/:semver-2.0.0-brightgreen.svg)](http://semver.org)
+![](https://img.shields.io/npm/types/scrub-js.svg)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](/docs/CODE_OF_CONDUCT.md)
+[![Join our Slack community](https://img.shields.io/badge/Slack-Join%20our%20community!-orange)]()
+
+</p>
+
 ## Installation
 
 Ensure you have Go installed (1.18+ recommended). To use this library, install the required dependencies:
