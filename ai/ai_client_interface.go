@@ -57,7 +57,6 @@ type Client interface {
 	Close() error
 }
 
-// ClientOptions Current Approach (Functional Options Pattern)
 // ClientOptions contains all configuration options
 type ClientOptions struct {
 	AccessKey   string
@@ -68,56 +67,3 @@ type ClientOptions struct {
 	ModelID     string
 	Timeout     int
 }
-
-//
-//// ClientOption is used for configuring the client
-//type ClientOption func(*ClientOptions)
-//
-//// WithAPIKey sets the API key for authentication
-//func WithAPIKey(apiKey string) ClientOption {
-//	return func(o *ClientOptions) {
-//		o.APIKey = apiKey
-//	}
-//}
-//
-//// WithRegion sets the region for services like AWS
-//func WithRegion(region string) ClientOption {
-//	return func(o *ClientOptions) {
-//		o.Region = region
-//	}
-//}
-//
-//// WithEndpointURL sets a custom endpoint URL
-//func WithEndpointURL(url string) ClientOption {
-//	return func(o *ClientOptions) {
-//		o.EndpointURL = url
-//	}
-//}
-//
-//// WithModelID sets the default model ID to use
-//func WithModelID(modelID string) ClientOption {
-//	return func(o *ClientOptions) {
-//		o.ModelID = modelID
-//	}
-//}
-//
-//// WithAccessKey sets the access key for authentication
-//func WithAccessKey(accessKey string) ClientOption {
-//	return func(o *ClientOptions) {
-//		o.AccessKey = accessKey
-//	}
-//}
-//
-//// WithSecretKey sets the secret key for authentication
-//func WithSecretKey(secretKey string) ClientOption {
-//	return func(o *ClientOptions) {
-//		o.SecretKey = secretKey
-//	}
-//}
-//
-//// WithTimeout sets a timeout for requests in seconds
-//func WithTimeout(seconds int) ClientOption {
-//	return func(o *ClientOptions) {
-//		o.Timeout = seconds
-//	}
-//}

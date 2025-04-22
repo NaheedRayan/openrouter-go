@@ -19,7 +19,7 @@ This repository provides a Golang library for interacting with various AI models
 Ensure you have Go installed (1.18+ recommended). To use this library, install the required dependencies:
 
 ```sh
-go get github.com/NaheedRayan/openrouter-go@v0.1.2-alpha
+go get github.com/NaheedRayan/openrouter-go@v0.1.3-alpha
 ```
 
 Also, install `godotenv` for environment variable management:
