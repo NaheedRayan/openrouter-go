@@ -57,30 +57,30 @@ You can initialize a client for different AI providers:
 #### OpenAI Example
 
 ```go
-client, err := ai.InitializeClient(ctx, ai.ProviderOpenAI,
-    ai.WithAPIKey("your_openai_key"),
-    ai.WithModelID("gpt-4o-mini"),
-)
+client, err := ai.InitializeClient(ctx, ai.ProviderOpenAI, ai.ClientOptions{
+	APIKey:  apiKey,
+	ModelID: "gpt-4o-mini",
+})
 ```
 
 #### Gemini Example
 
 ```go
-client, err := ai.InitializeClient(ctx, ai.ProviderGemini,
-    ai.WithAPIKey("your_gemini_key"),
-    ai.WithModelID("models/gemini-2.0-flash-lite-preview-02-05"),
-)
+client, err := ai.InitializeClient(ctx, ai.ProviderGemini, ai.ClientOptions{
+    APIKey:  apiKey,
+    ModelID: "models/gemini-2.0-flash-lite-preview-02-05",
+})
 ```
 
 #### AWS Bedrock Example
 
 ```go
-client, err := ai.InitializeClient(ctx, ai.ProviderBedrock,
-    ai.WithAPIKey("your_aws_access_key"),
-    ai.WithEndpointURL("your_aws_secret_key"),
-    ai.WithRegion("us-east-1"),
-    ai.WithModelID("amazon.nova-lite-v1:0"),
-)
+client, err := ai.InitializeClient(ctx, ai.ProviderBedrock, ai.ClientOptions{
+    AccessKey: accessKey,
+    SecretKey: secretKey,
+    Region:    "us-east-1",
+    ModelID:   "amazon.nova-lite-v1:0",
+})
 ```
 
 ### Sending Requests

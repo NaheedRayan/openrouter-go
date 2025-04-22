@@ -17,38 +17,23 @@ type GeminiClient struct {
 	options ClientOptions
 }
 
-// Ensure GeminiClient implements Client interface
-var _ Client = (*GeminiClient)(nil)
-
 // NewGeminiClient creates a new Google Gemini client
 func NewGeminiClient() *GeminiClient {
 	return &GeminiClient{}
 }
 
 // Initialize sets up the Gemini client
-func (c *GeminiClient) Initialize(ctx context.Context, opts ...ClientOption) error {
-	// Apply options
-	options := ClientOptions{
-		ModelID: "models/gemini-2.0-flash-lite-preview-02-05", // Default model
-	}
-
-	for _, opt := range opts {
-		opt(&options)
-	}
-
-	c.options = options
-
+func (c *GeminiClient) Initialize(ctx context.Context, opts ClientOptions) error {
 	// Create the Gemini client
-	client, err := genai.NewClient(ctx, option.WithAPIKey(options.APIKey))
+	client, err := genai.NewClient(ctx, option.WithAPIKey(opts.APIKey))
 	if err != nil {
 		return fmt.Errorf("failed to create Gemini client: %v", err)
 	}
 
+	// Apply options
+	c.options = opts
 	c.client = client
-
-	// Create the model
-	model := client.GenerativeModel(options.ModelID)
-	c.model = model
+	c.model = client.GenerativeModel(opts.ModelID)
 
 	return nil
 }
@@ -58,8 +43,8 @@ func (c *GeminiClient) TextCompletion(ctx context.Context, messages []InputMessa
 	// Apply configuration
 	c.model.SetTemperature(float32(config.Temperature))
 	c.model.SetTopP(float32(config.TopP))
-	c.model.SetTopK(int32(config.TopK))
-	c.model.SetMaxOutputTokens(int32(config.MaxTokens))
+	c.model.SetTopK(config.TopK)
+	c.model.SetMaxOutputTokens(config.MaxTokens)
 
 	// Set system prompt if provided
 	if config.SystemPrompt != "" {
@@ -109,8 +94,8 @@ func (c *GeminiClient) ImageRecognition(ctx context.Context, messages []InputMes
 	// Apply configuration
 	c.model.SetTemperature(float32(config.Temperature))
 	c.model.SetTopP(float32(config.TopP))
-	c.model.SetTopK(int32(config.TopK))
-	c.model.SetMaxOutputTokens(int32(config.MaxTokens))
+	c.model.SetTopK(config.TopK)
+	c.model.SetMaxOutputTokens(config.MaxTokens)
 
 	// Set system prompt if provided
 	if config.SystemPrompt != "" {

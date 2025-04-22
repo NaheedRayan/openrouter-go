@@ -5,7 +5,6 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/credentials"
@@ -19,46 +18,33 @@ type BedrockClient struct {
 	modelID string
 }
 
-// Ensure BedrockClient implements Client interface
-//var _ Client = (*BedrockClient)(nil)
-
 // NewBedrockClient creates a new AWS Bedrock client
 func NewBedrockClient() *BedrockClient {
 	return &BedrockClient{}
 }
 
 // Initialize sets up the Bedrock client with AWS credentials
-func (c *BedrockClient) Initialize(ctx context.Context, opts ...ClientOption) error {
-	// Apply options
-	options := ClientOptions{
-		Region:  "us-east-1",             // Default region
-		ModelID: "amazon.nova-lite-v1:0", // Default model
-	}
-
-	for _, opt := range opts {
-		opt(&options)
-	}
-
-	c.options = options
-	c.modelID = options.ModelID
+func (c *BedrockClient) Initialize(ctx context.Context, opts ClientOptions) error {
 
 	// Setup AWS credentials
 	var awsConfig aws.Config
 	var err error
 
-	cred := credentials.NewStaticCredentialsProvider(options.APIKey, options.EndpointURL, "")
+	cred := credentials.NewStaticCredentialsProvider(opts.AccessKey, opts.SecretKey, "")
 
 	awsConfig, err = config.LoadDefaultConfig(ctx,
 		config.WithCredentialsProvider(cred),
-		config.WithRegion(options.Region),
+		config.WithRegion(opts.Region),
 	)
 
 	if err != nil {
 		return fmt.Errorf("unable to load AWS SDK config: %v", err)
 	}
 
-	// Create the Bedrock client
+	// Apply options
+	c.options = opts
 	c.client = bedrockruntime.NewFromConfig(awsConfig)
+	c.modelID = opts.ModelID
 
 	return nil
 }

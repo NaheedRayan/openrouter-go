@@ -15,30 +15,18 @@ type OpenAIClient struct {
 	modelID string
 }
 
-// Ensure OpenAIClient implements Client interface
-var _ Client = (*OpenAIClient)(nil)
-
 // NewOpenAIClient creates a new OpenAI client
 func NewOpenAIClient() *OpenAIClient {
 	return &OpenAIClient{}
 }
 
 // Initialize sets up the OpenAI client
-func (c *OpenAIClient) Initialize(ctx context.Context, opts ...ClientOption) error {
+func (c *OpenAIClient) Initialize(ctx context.Context, opts ClientOptions) error {
 	// Apply options
-	options := ClientOptions{
-		ModelID: string(openai.ChatModelGPT4oMini), // Default model
-	}
-
-	for _, opt := range opts {
-		opt(&options)
-	}
-
-	c.options = options
-	c.modelID = options.ModelID
-
+	c.options = opts
+	c.modelID = opts.ModelID
 	// Create the OpenAI client
-	c.client = openai.NewClient(option.WithAPIKey(options.APIKey))
+	c.client = openai.NewClient(option.WithAPIKey(opts.APIKey))
 
 	return nil
 }

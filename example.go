@@ -68,10 +68,10 @@ func main() {
 // Test OpenAI client
 func testOpenAI(ctx context.Context, apiKey string) {
 	// Initialize client
-	client, err := ai.InitializeClient(ctx, ai.ProviderOpenAI,
-		ai.WithAPIKey(apiKey),
-		ai.WithModelID("gpt-4o-mini"),
-	)
+	client, err := ai.InitializeClient(ctx, ai.ProviderOpenAI, ai.ClientOptions{
+		APIKey:  apiKey,
+		ModelID: "gpt-4o-mini",
+	})
 	if err != nil {
 		log.Fatalf("Failed to initialize OpenAI client: %v", err)
 	}
@@ -111,10 +111,10 @@ func testOpenAI(ctx context.Context, apiKey string) {
 // Test Gemini client
 func testGemini(ctx context.Context, apiKey string) {
 	// Initialize client
-	client, err := ai.InitializeClient(ctx, ai.ProviderGemini,
-		ai.WithAPIKey(apiKey),
-		ai.WithModelID("models/gemini-2.0-flash-lite-preview-02-05"),
-	)
+	client, err := ai.InitializeClient(ctx, ai.ProviderGemini, ai.ClientOptions{
+		APIKey:  apiKey,
+		ModelID: "models/gemini-2.0-flash-lite-preview-02-05",
+	})
 	if err != nil {
 		log.Fatalf("Failed to initialize Gemini client: %v", err)
 	}
@@ -155,10 +155,10 @@ func testGemini(ctx context.Context, apiKey string) {
 // Test Gemini Multimodal client
 func testGeminiMultimodal(ctx context.Context, apiKey string) {
 	// Initialize client
-	client, err := ai.InitializeClient(ctx, ai.ProviderGemini,
-		ai.WithAPIKey(apiKey),
-		ai.WithModelID("models/gemini-2.0-flash-lite-preview-02-05"),
-	)
+	client, err := ai.InitializeClient(ctx, ai.ProviderGemini, ai.ClientOptions{
+		APIKey:  apiKey,
+		ModelID: "models/gemini-2.0-flash-lite-preview-02-05",
+	})
 	if err != nil {
 		log.Fatalf("Failed to initialize Gemini client: %v", err)
 	}
@@ -219,12 +219,13 @@ func testGeminiMultimodal(ctx context.Context, apiKey string) {
 // Test Bedrock client
 func testBedrock(ctx context.Context, accessKey, secretKey string) {
 	// Initialize client
-	client, err := ai.InitializeClient(ctx, ai.ProviderBedrock,
-		ai.WithAPIKey(accessKey),
-		ai.WithEndpointURL(secretKey), // Using EndpointURL for secretKey
-		ai.WithRegion("us-east-1"),
-		ai.WithModelID("amazon.nova-lite-v1:0"),
-	)
+	client, err := ai.InitializeClient(ctx, ai.ProviderBedrock, ai.ClientOptions{
+		AccessKey: accessKey,
+		SecretKey: secretKey,
+		Region:    "us-east-1",
+		ModelID:   "amazon.nova-lite-v1:0",
+	})
+
 	if err != nil {
 		log.Fatalf("Failed to initialize Bedrock client: %v", err)
 	}
@@ -263,12 +264,12 @@ func testBedrock(ctx context.Context, accessKey, secretKey string) {
 // Test Bedrock client
 func testBedrockMultimodal(ctx context.Context, accessKey, secretKey string) {
 	// Initialize client
-	client, err := ai.InitializeClient(ctx, ai.ProviderBedrock,
-		ai.WithAPIKey(accessKey),
-		ai.WithEndpointURL(secretKey), // Using EndpointURL for secretKey
-		ai.WithRegion("us-east-1"),
-		ai.WithModelID("amazon.nova-lite-v1:0"),
-	)
+	client, err := ai.InitializeClient(ctx, ai.ProviderBedrock, ai.ClientOptions{
+		AccessKey: accessKey,
+		SecretKey: secretKey,
+		Region:    "us-east-1",
+		ModelID:   "amazon.nova-lite-v1:0",
+	})
 	if err != nil {
 		log.Fatalf("Failed to initialize Bedrock client: %v", err)
 	}

@@ -5,17 +5,14 @@ import (
 	"fmt"
 )
 
-// Provider represents the AI service provider
-type Provider string
-
 const (
-	ProviderOpenAI  Provider = "openai"
-	ProviderGemini  Provider = "gemini"
-	ProviderBedrock Provider = "bedrock"
+	ProviderOpenAI  = "openai"
+	ProviderGemini  = "gemini"
+	ProviderBedrock = "bedrock"
 )
 
 // NewClient creates a new AI client for the specified provider
-func NewClient(provider Provider) (Client, error) {
+func NewClient(provider string) (Client, error) {
 	switch provider {
 	case ProviderOpenAI:
 		return NewOpenAIClient(), nil
@@ -29,13 +26,13 @@ func NewClient(provider Provider) (Client, error) {
 }
 
 // InitializeClient is a helper to create and initialize a client in one step
-func InitializeClient(ctx context.Context, provider Provider, opts ...ClientOption) (Client, error) {
+func InitializeClient(ctx context.Context, provider string, opts ClientOptions) (Client, error) {
 	client, err := NewClient(provider)
 	if err != nil {
 		return nil, err
 	}
 
-	if err := client.Initialize(ctx, opts...); err != nil {
+	if err := client.Initialize(ctx, opts); err != nil {
 		return nil, err
 	}
 
